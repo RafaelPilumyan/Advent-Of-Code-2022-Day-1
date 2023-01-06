@@ -2271,19 +2271,25 @@ const puzzleInput = `
 6089
 `;
 
+const sumReducer = (sum, num) => sum + num;
+
 const getSumOfGroup = (group) =>
   group
     .split("\n")
     .map(Number)
     .reduce((sum, num) => sum + num, 0);
 
-// divide the list into an array of groups
 const numberGroups = puzzleInput.split("\n\n");
 
-// find the sum of each group
 const groupSums = numberGroups.map(getSumOfGroup);
 
-// find the largest sum
+//  part 1 find the max sum
 const maxSum = Math.max(...groupSums);
 
-console.log(numberGroups);
+// part 2
+const sortedSums = [...groupSums].sort((num1, num2) => num2 - num1);
+
+const top3Sums = sortedSums.slice(0, 3);
+const sumOfTop3 = top3Sums.reduce(sumReducer, 0);
+
+console.log(top3Sums);
